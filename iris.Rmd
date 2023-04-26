@@ -1,0 +1,156 @@
+---
+title: "Iris explorer"
+author: "Lisa"
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2:
+    df_print: paged
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: hide
+    theme: cosmo
+---
+
+<style>
+
+ul.task, ul.hint {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+ul.task > li, ul.hint > li {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+ul.hint > li:before {
+  content: "\01F4A1";
+  padding-right: 0.25em;
+}
+ul.task > li:before {
+  content: "\01F9E0";
+  padding-right: 0.25em;
+}
+
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+# Preface
+
+- Scope and goals
+- Prerequisites
+- Procedure
+
+
+# The Challenges
+
+## Read the data set
+
+**The data set is stored in `raw_data/irisData.csv`.**
+
+<ul class="task">
+  <li>Read the data and store it in a (preliminary) data structure that seems appropriate to you.</li>
+  <li>Which data structure do you chose and why?</li>
+</ul>
+
+**Hint**
+
+<ul class="hint">
+  <li>`csv` is a format for text files.</li>
+  <li>The first row of the data file contains the column headings.</li>
+  <li>Rows are separated by a line break`\n`.</li>
+  <li>Columns are separated by a comma `,`.</li>
+</ul>
+
+```{r}
+# Read data and store it as "flowers" ----
+
+# Set working directory to the parent directory of "raw_data"
+# ...
+
+data_path <- file.path("raw_data", "irisData.csv")
+if (file.exists(data_path)) {
+  # read the data from the folder and store it as "flowers"
+  flowers <- read.csv(data_path,
+                      header = TRUE)
+  # read.csv stores the data as data.frame, see ?data.frame
+} else {
+  # hint: iris is a built-in data set that comes with your R installation
+  data("iris") # load
+  flowers <- iris # name it "flowers"
+}
+
+```
+
+## The iris flower
+
+**Do an online research.**
+
+<ul class="task">
+  <li>What is an iris? How does it look like? Where do they grow?</li>
+  <li>Find pictures of the species _iris setosa_, _versicolor_, and _virginica_.</li>
+  <li>Compare the species of irises: What do they have in common, which features distinguish them?</li>
+</ul>
+
+**Hint**
+
+<ul class="hint">
+  <li>It's fine to use a search engine.</li>
+  <li>It's fine to study Wikipedia articles.</li>
+</ul>
+
+
+## Inspect your data, 1
+
+**Get an overview over the data.**
+
+<ul class="task">
+  <li>How many rows are there, how many columns?</li>
+  <li>What could the columns mean? What could the rows indicate?</li>
+  <li>Which kind of values do you find in each column? Which data type would you use to represent them adequately?</li>
+</ul>
+
+
+## Prepare the data
+
+**Data types**
+
+<ul class="task">
+  <li>If necessary, convert the data columns to the adequate data type.</li>
+  <li>How could you summarize and visualize the data per column? Collect ideas.</li>
+</ul>
+
+
+## Scales of measurement
+
+<ul class="task">
+  <li>Find out about the different scales of measurement.</li>
+  <li>Which scale of measurement do you think describes the data in each column the best?</li>
+  <li>Do your currently used data types reflect the measurement scale? Explain why or why not and convert the data if necessary.</li>
+</ul>
+
+
+## Inspect your data, 2
+
+<ul class="task">
+  <li>Make a summary for each column. Which kind of measure or plot type summarizes the data adequately? Explain your choices.</li>
+</ul>
+
+
+## TBC
+
+More ideas&hellip;
+
+
+# Wrap-up
+
+- Which data analysis skills did you practice?
+- Which things did you learn?
+- What was easy for you, what was difficult?
+- What else could one explore with this data set?
+- What would you like to learn next?
