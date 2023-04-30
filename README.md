@@ -1,6 +1,13 @@
 # Iris Explorer
 
-Explore the iris flower species.
+> Explore the iris flower species. Work in progress.
+
+_Iris Explorer_ is a series of tasks that can guide your first steps in exploring the `iris` data set. 
+
+
+## How do I use this?
+
+You can find the tasks in `irisExplorer.html`. It also features model solutions &ndash; click on the `Code` buttons to view them. Try to solve the tasks yourself before looking up the example solutions. You can find the complete source code in the`irisExplorer.Rmd` which you can execute directly in R. 
 
 
 ## References
