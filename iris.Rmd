@@ -84,7 +84,29 @@ if (file.exists(data_path)) {
   data("iris") # load
   flowers <- iris # name it "flowers"
 }
+```
 
+## Assemble a first-aid kit for coding
+
+In coding, you will regularly encounter errors &ndash; whether you are a beginner, an advanced user or a professional. One of the most essential skills in programming (and life) is to learn how to help yourself and how to ask others for help. 
+
+**Make a list of approaches how to deal with coding errors.** 
+
+<ul class="task">
+  <li>Find at least 4 ways how to help yourself or get help from others.</li>
+  <li>Organize your list. For instance, what could be a reasonable order for trying the different approaches? Or can you group the items by problem type?</li>
+</ul>
+
+``` {r}
+# Some ideas
+
+# - Read the task description again and make sure to understand the problem at hand.
+# - Read the error/ warning message carefully. To which line does it refer? Which type of error/ warning is it? What could have gone wrong in that line (or the lines near it)?
+# - Look up the documentation. Which parameters does the function/ class etc. need? Which types of data are expected? What is it supposed to return?
+# - Look up examples of correct usage. Try to run the example and adjust it for your own program.
+# - Test your code after modifying it.
+# - Search a forum for threads that describe similar problems. Could your problem have the same origin? Which solutions have been discussed there?
+# - Create an own thread in which you describe your problem, your goal and attach your code to get help from other users. What exactly would you need to tell other people so that they can understand and help?
 ```
 
 ## The iris flower
@@ -92,7 +114,7 @@ if (file.exists(data_path)) {
 **Do an online research.**
 
 <ul class="task">
-  <li>What is an iris? How does it look like? Where do they grow?</li>
+  <li>What is an iris flower? How does it look like? Where do they grow?</li>
   <li>Find pictures of the species _iris setosa_, _versicolor_, and _virginica_.</li>
   <li>Compare the species of irises: What do they have in common, which features distinguish them?</li>
 </ul>
