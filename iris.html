@@ -2996,7 +2996,7 @@ Which kind of values do you find in each column? Which data type would you use t
 colnames(flowers)
 ## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;
 # lengths and widths of the sepals and petals [numeric values in cm]
-# name of iris species [name string]
+# name of iris species [name]
 
 cat(&quot;rows:&quot;, nrow(flowers), end = &quot;\n&quot;)
 ## rows: 150
@@ -3026,7 +3026,7 @@ How could you summarize and visualize the data per column? Collect ideas.
 <pre class="r"><code># Species
 unique(flowers$Species) # There are 3 species
 ## [1] &quot;setosa&quot;     &quot;versicolor&quot; &quot;virginica&quot;
-flowers$Species &lt;- as.factor(flowers$Species) # Make column a factor</code></pre>
+flowers$Species &lt;- as.factor(flowers$Species) # Make sure column is a factor (in case we read it from plain text file)</code></pre>
 </div>
 <div id="scales-of-measurement" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Scales of measurement</h2>

@@ -143,7 +143,7 @@ In coding, you will regularly encounter errors &ndash; whether you are a beginne
 cat("columns:", ncol(flowers), end = "\n")
 colnames(flowers)
 # lengths and widths of the sepals and petals [numeric values in cm]
-# name of iris species [name string]
+# name of iris species [name]
 
 cat("rows:", nrow(flowers), end = "\n")
 # number of flowers for which sepals and petal were measured
@@ -165,7 +165,7 @@ str(flowers)
 ```{r}
 # Species
 unique(flowers$Species) # There are 3 species
-flowers$Species <- as.factor(flowers$Species) # Make column a factor
+flowers$Species <- as.factor(flowers$Species) # Make sure column is a factor (in case we read it from plain text file)
 ```
 
 
