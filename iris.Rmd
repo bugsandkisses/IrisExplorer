@@ -36,7 +36,7 @@ ul.task > li:before {
 </style>
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
 rm(list = ls())
 ```
 
@@ -95,6 +95,7 @@ In coding, you will regularly encounter errors &ndash; whether you are a beginne
 <ul class="task">
   <li>Find at least 4 ways how to help yourself or get help from others.</li>
   <li>Organize your list. For instance, what could be a reasonable order for trying the different approaches? Or can you group the items by problem type?</li>
+  <li>Display your results with a code or a notebook entry.</li>
 </ul>
 
 ``` {r}
@@ -138,6 +139,20 @@ In coding, you will regularly encounter errors &ndash; whether you are a beginne
 </ul>
 
 
+```{r}
+cat("columns:", ncol(flowers), end = "\n")
+colnames(flowers)
+# lengths and widths of the sepals and petals [numeric values in cm]
+# name of iris species [name string]
+
+cat("rows:", nrow(flowers), end = "\n")
+# number of flowers for which sepals and petal were measured
+
+cat("structure of data set:", end = "\n")
+str(flowers)
+```
+
+
 ## Prepare the data
 
 **Data types**
@@ -146,6 +161,12 @@ In coding, you will regularly encounter errors &ndash; whether you are a beginne
   <li>If necessary, convert the data columns to the adequate data type.</li>
   <li>How could you summarize and visualize the data per column? Collect ideas.</li>
 </ul>
+
+```{r}
+# Species
+unique(flowers$Species) # There are 3 species
+flowers$Species <- as.factor(flowers$Species) # Make column a factor
+```
 
 
 ## Scales of measurement
@@ -161,7 +182,25 @@ In coding, you will regularly encounter errors &ndash; whether you are a beginne
 
 <ul class="task">
   <li>Make a summary for each column. Which kind of measure or plot type summarizes the data adequately? Explain your choices.</li>
+  <li>How do you interpret your plots?</li>
 </ul>
+
+```{r}
+# Description per column
+lapply(flowers, function(x) { cbind(summary(x))})
+# For the species column
+table(flowers$Species) # Same number of flowers for each species
+```
+
+```{r, echo=FALSE, fig.align='center', out.width="100%", fig.cap="Histograms of the sepal and petal measurements."}
+par(mfrow = c(2, 2))
+tmp <- sapply(1:4, function(n) {
+  hist(flowers[, n], 
+       main = colnames(flowers)[n],
+       xlab = "Measurement [cm]")
+})
+
+```
 
 
 ## TBC
