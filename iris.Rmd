@@ -95,7 +95,7 @@ In coding, you will regularly encounter errors &ndash; whether you are a beginne
 <ul class="task">
   <li>Find at least 4 ways how to help yourself or get help from others.</li>
   <li>Organize your list. For instance, what could be a reasonable order for trying the different approaches? Or can you group the items by problem type?</li>
-  <li>Display your results with a code or a notebook entry.</li>
+  <li>Present your results with a code or a notebook entry.</li>
 </ul>
 
 ``` {r}
@@ -106,6 +106,7 @@ In coding, you will regularly encounter errors &ndash; whether you are a beginne
 # - Look up the documentation. Which parameters does the function/ class etc. need? Which types of data are expected? What is it supposed to return?
 # - Look up examples of correct usage. Try to run the example and adjust it for your own program.
 # - Test your code after modifying it.
+# - Take a break.
 # - Search a forum for threads that describe similar problems. Could your problem have the same origin? Which solutions have been discussed there?
 # - Create an own thread in which you describe your problem, your goal and attach your code to get help from other users. What exactly would you need to tell other people so that they can understand and help?
 ```
@@ -128,7 +129,7 @@ In coding, you will regularly encounter errors &ndash; whether you are a beginne
 </ul>
 
 
-## Inspect your data, 1
+## Strucure of the data
 
 **Get an overview over the data.**
 
@@ -173,33 +174,124 @@ flowers$Species <- as.factor(flowers$Species) # Make sure column is a factor (in
 
 <ul class="task">
   <li>Find out about the different scales of measurement.</li>
-  <li>Which scale of measurement do you think describes the data in each column the best?</li>
-  <li>Do your currently used data types reflect the measurement scale? Explain why or why not and convert the data if necessary.</li>
+  <li>Which scale of measurement do you think describes the data in each column best?</li>
+  <li>Do your currently used data types reflect the measurement scale? Explain why/ why not and convert the data if necessary.</li>
 </ul>
 
 
-## Inspect your data, 2
+## Numeric summary
 
 <ul class="task">
-  <li>Make a summary for each column. Which kind of measure or plot type summarizes the data adequately? Explain your choices.</li>
-  <li>How do you interpret your plots?</li>
+  <li>Make a summary for each numeric column (irrespective of species). Which kind of measure summarizes the data adequately? Explain your choices.</li>
+  <li>What does the summary reveal about the data?</li>
 </ul>
 
 ```{r}
 # Description per column
-lapply(flowers, function(x) { cbind(summary(x))})
+lapply(flowers, function(x) { cbind(summary(x)) })
 # For the species column
 table(flowers$Species) # Same number of flowers for each species
 ```
 
+## Correlations
+
+<ul class="task">
+  <li>What is a correlation? Which values can a correlation coefficient take and what does it mean?</li>
+  <li>Find out about common methods of computing a correlation.</li>
+  <li>Calculate the Pearson-correlations for the petals and sepals.</li>
+</ul>
+
+```{r}
+print(cor(flowers[1:4]), digits = 2)
+```
+
+## Boxplots and histograms
+
+<ul class="task">
+  <li>Make a boxplot or a histogram for each numeric column (irrespective of species).</li>
+  <li>How do you interpret the boxplots?/ histograms?</li>
+  <li>What do the plots reveal about the petals and sepals in general?</li>
+</ul>
+
+```{r, echo=FALSE, fig.align='center', out.width="100%", fig.cap="Boxplots of the sepal and petal measurements."}
+
+flowers_long <- flowers
+flowers_long$id <- 1:nrow(flowers_long)
+flowers_long <- reshape(flowers_long,
+                        direction = 'long',
+                        timevar = 'Dimension',
+                        varying = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+flowers_long$id <- row.names(flowers_long)
+flowers_long <- reshape(flowers_long, 
+                        idvar = "id", 
+                        varying = c("Sepal", "Petal"), 
+                        times = c("Sepal", "Petal"), timevar = "Type",
+                         v.names = c("Measure"), direction = "long")
+# head(flowers_long)
+boxplot(Measure ~ Dimension*Type, flowers_long,
+        col = c("#a6611a", "#dfc27d", "#018571", "#80cdc1"),
+        ylab = "Measurement [cm]")
+```
+
 ```{r, echo=FALSE, fig.align='center', out.width="100%", fig.cap="Histograms of the sepal and petal measurements."}
+col <- c("#018571", "#80cdc1", "#a6611a", "#dfc27d")
 par(mfrow = c(2, 2))
 tmp <- sapply(1:4, function(n) {
   hist(flowers[, n], 
        main = colnames(flowers)[n],
-       xlab = "Measurement [cm]")
+       xlab = "Measurement [cm]",
+       col = col[n], freq = FALSE,
+       xlim = c(0, 10))
 })
 
+```
+
+## Numeric summary by species
+
+<ul class="task">
+  <li>Make a summary for each species.</li>
+</ul>
+
+```{r}
+for (sp in unique(flowers$Species)) {
+  print(sp)
+  print(summary(flowers[flowers$Species == sp, 1:4]))
+}
+```
+
+
+## Sepal sizes by species
+
+<ul class="task">
+  <li>Plot the sepal width by species.</li>
+  <li>Plot the sepal length by species.</li>
+  <li>What do you notice?</li>
+  <li>(Do the same for the petals.)</li>
+</ul>
+
+``` {r, fig.align='center', out.width="100%", fig.cap="Boxplot of the sepal and petal measurements by species."}
+col <- c("#018571", "#80cdc1", "#a6611a", "#dfc27d")
+par(mfrow = c(1, 4), las = 2)
+boxplot(Sepal.Length ~ Species, flowers,
+        main = "Sepal length",
+        ylab = "Size [cm]", xlab = "",
+        ylim = c(0, 10),
+        col = col[1])
+boxplot(Sepal.Width ~ Species, flowers,
+        main = "Sepal width",
+        ylab = "Size [cm]", xlab = "",
+        ylim = c(0, 10),
+        col = col[2])
+boxplot(Petal.Length ~ Species, flowers,
+        main = "Petal length",
+        ylab = "Size [cm]", xlab = "",
+        ylim = c(0, 10),
+        col = col[3])
+boxplot(Petal.Length ~ Species, flowers,
+        main = "Petal width",
+        ylab = "Size [cm]", xlab = "",
+        ylim = c(0, 10),
+        col = col[4])
 ```
 
 
