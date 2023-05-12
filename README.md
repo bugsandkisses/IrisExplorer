@@ -7,7 +7,7 @@ _Iris Explorer_ is a series of tasks that can guide your first steps in explorin
 
 ## How do I use this?
 
-You can find the tasks in `irisExplorer.html`. It also features model solutions &ndash; click on the `Code` buttons to view them. Try to solve the tasks yourself before looking up the example solutions. You can find the complete source code in the`irisExplorer.Rmd` which you can execute directly in R. 
+You can find the tasks in `irisExplorer.html`. It also features model solutions &ndash; click on the `Code` buttons to view them. You can find the complete source code in the`irisExplorer.Rmd` which you can execute directly in R. 
 
 
 ## References
